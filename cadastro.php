@@ -2,11 +2,11 @@
 
 $login = $_POST['login'];
 $senha = MD5($_POST['senha']);
-$connect = mysql_connect('localhost', 'root', '');
-$db = mysql_db('login');
+$connect = mysqli_connect('localhost', 'root', '');
+$db = mysqli_select_db($connect,'login');
 $query_select = "SELECT login FROM usuários WHERE login = '$login'";
-$select = myslq_query($query_select,$connect);
-$array = mysql_fetch_array($select);
+$select = myslqi_query($connect, $query_select,);
+$array = mysqli_fetch_array($select);
 $logarray = $array['login'];
 
   if($login == "" || $login == null){
@@ -19,7 +19,7 @@ $logarray = $array['login'];
 
     }else{
         $query = "INSERT INTO usuarios (login,senha) VALUES ('$login','$senha')";
-        $insert = mysql_query($query,$connect);
+        $insert = mysqli_query($connect, $query);
 
         if($insert){
             echo"<script language='javascript' type='text/javascript'>alert('Não foi possível cadastrar esse usuário');window.location.href='cadastro.html'</script>";
